@@ -11,12 +11,12 @@
     --primary-color: #0066cc;
     --secondary-color: #00a8cc;
     --accent-color: #ff6b6b;
-    --dark-bg: #0f172a;
+    --dark-bg: #1a1a2e;
     --light-bg: #f8f9fa;
-    --text-dark: #1a202c;
-    --text-light: #4a5568;
-    --border-color: #e2e8f0;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --text-dark: #333;
+    --text-light: #666;
+    --border-color: #ddd;
+    --transition: all 0.3s ease;
 }
 
 html {
@@ -40,13 +40,13 @@ body {
    Navigation
    ============================================ */
 .navbar {
-    background: linear-gradient(135deg, #0066cc 0%, #00a8cc 100%);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
     padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 4px 20px rgba(0, 102, 204, 0.15);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .container {
@@ -57,14 +57,14 @@ body {
 
 .logo {
     font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 .nav-links > li {
@@ -74,63 +74,14 @@ body {
 .nav-links a {
     color: white;
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    font-weight: 500;
     transition: var(--transition);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
     display: block;
 }
 
 .nav-links a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-}
-
-/* Dropdown Menu */
-.dropdown {
-    position: relative;
-}
-
-.dropdown-toggle::after {
-    content: '▼';
-    margin-left: 6px;
-    font-size: 0.7rem;
-}
-
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: rgba(15, 23, 42, 0.95);
-    list-style: none;
-    min-width: 200px;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    margin-top: 0.5rem;
-    animation: slideDown 0.3s ease;
-}
-
-.dropdown-menu li {
-    padding: 0;
-}
-
-.dropdown-menu a {
-    padding: 0.75rem 1.5rem;
-    color: white;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.dropdown-menu a:hover {
-    background-color: rgba(0, 168, 204, 0.2);
-}
-
-.dropdown-menu li:last-child a {
-    border-bottom: none;
-}
-
-.dropdown:hover .dropdown-menu {
-    display: block;
+    opacity: 0.8;
 }
 
 .menu-toggle {
@@ -142,49 +93,78 @@ body {
     cursor: pointer;
 }
 
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    content: ' ▼';
+    font-size: 0.7rem;
+    margin-left: 0.3rem;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.95), rgba(0, 168, 204, 0.95));
+    list-style: none;
+    padding: 0.5rem 0;
+    border-radius: 0 0 8px 8px;
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown.active .dropdown-menu {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+.dropdown-menu li {
+    padding: 0;
+}
+
+.dropdown-menu a {
+    padding: 0.75rem 1.5rem;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-left-color: white;
+    padding-left: 2rem;
+}
+
 /* ============================================
    Hero Section
    ============================================ */
 .hero {
-    background: linear-gradient(135deg, #0f172a 0%, #0066cc 50%, #00a8cc 100%);
+    background: linear-gradient(135deg, var(--dark-bg), var(--primary-color));
     color: white;
-    padding: 140px 20px;
+    padding: 120px 20px;
     text-align: center;
     min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at top right, rgba(0, 168, 204, 0.3), transparent);
-    pointer-events: none;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
 }
 
 .hero-content h1 {
     font-size: 4rem;
     margin-bottom: 1rem;
     animation: slideDown 0.8s ease;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: -1px;
 }
 
 .hero-content p {
     font-size: 1.5rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     opacity: 0.95;
     animation: slideUp 0.8s ease;
     font-weight: 300;
@@ -192,53 +172,52 @@ body {
 
 .cta-button {
     display: inline-block;
-    background-color: #ff6b6b;
+    background-color: var(--secondary-color);
     color: white;
-    padding: 16px 48px;
+    padding: 15px 40px;
     text-decoration: none;
     border-radius: 50px;
-    font-weight: 600;
+    font-weight: bold;
     transition: var(--transition);
-    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
-    border: 2px solid transparent;
+    box-shadow: 0 4px 15px rgba(0, 168, 204, 0.4);
 }
 
 .cta-button:hover {
-    background-color: white;
-    color: #ff6b6b;
+    background-color: var(--accent-color);
     transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 168, 204, 0.6);
 }
 
 /* ============================================
    Sections
    ============================================ */
 .section {
-    padding: 100px 20px;
+    padding: 80px 20px;
 }
 
 .section.alt-bg {
-    background-color: #f0f4f8;
+    background-color: var(--light-bg);
 }
 
 .section h2 {
     font-size: 3.5rem;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     text-align: center;
-    color: #0066cc;
+    color: var(--primary-color);
     position: relative;
-    padding-bottom: 1.5rem;
-    font-weight: 800;
+    padding-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .section h2::after {
     content: '';
     display: block;
-    width: 100px;
-    height: 5px;
-    background: linear-gradient(90deg, #0066cc, #00a8cc);
-    margin: 1.5rem auto 0;
-    border-radius: 3px;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    margin: 1rem auto 0;
+    border-radius: 2px;
 }
 
 /* ============================================
@@ -247,35 +226,35 @@ body {
 .content-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
+    gap: 2rem;
     margin-top: 2rem;
 }
 
 .card {
     background: white;
     padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
-    border-top: 5px solid #00a8cc;
+    border-top: 4px solid var(--secondary-color);
 }
 
 .card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 12px 35px rgba(0, 102, 204, 0.15);
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.2);
 }
 
 .card h3 {
-    color: #0066cc;
-    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
     font-size: 1.6rem;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .card p {
-    color: #4a5568;
+    color: var(--text-light);
     line-height: 1.8;
-    font-size: 1.05rem;
+    font-size: 1rem;
 }
 
 /* ============================================
@@ -283,23 +262,23 @@ body {
    ============================================ */
 .impact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
 }
 
 .impact-card {
     background: white;
     padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    border-left: 6px solid #ff6b6b;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
     transition: var(--transition);
+    border-left: 5px solid var(--accent-color);
     text-align: center;
 }
 
 .impact-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 35px rgba(255, 107, 107, 0.15);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.15);
 }
 
 .impact-icon {
@@ -308,15 +287,15 @@ body {
 }
 
 .impact-card h3 {
-    color: #ff6b6b;
+    color: var(--accent-color);
     margin-bottom: 1rem;
     font-size: 1.6rem;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .impact-card p {
-    color: #4a5568;
-    font-size: 1.05rem;
+    color: var(--text-light);
+    font-size: 1rem;
 }
 
 /* ============================================
@@ -324,35 +303,36 @@ body {
    ============================================ */
 .laws-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
 }
 
 .law-card {
     background: white;
     padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
-    border: 2px solid #0066cc;
+    border: 2px solid var(--primary-color);
 }
 
 .law-card:hover {
-    background: linear-gradient(135deg, #f0f7ff 0%, white 100%);
+    background-color: #f0f7ff;
     transform: scale(1.02);
-    box-shadow: 0 12px 35px rgba(0, 102, 204, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 102, 204, 0.15);
 }
 
 .law-card h3 {
-    color: #0066cc;
-    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
     font-size: 1.6rem;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .law-card p {
-    color: #4a5568;
-    font-size: 1.05rem;
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.8;
 }
 
 /* ============================================
@@ -360,28 +340,28 @@ body {
    ============================================ */
 .resources-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
 }
 
 .resource-card {
     background: white;
-    padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
 }
 
 .resource-card:hover {
-    box-shadow: 0 12px 35px rgba(0, 102, 204, 0.15);
-    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 102, 204, 0.15);
+    transform: translateY(-5px);
 }
 
 .resource-card h3 {
-    color: #0066cc;
+    color: var(--primary-color);
     margin-bottom: 1.5rem;
-    font-size: 1.6rem;
-    font-weight: 700;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 .resource-card ul {
@@ -389,37 +369,35 @@ body {
 }
 
 .resource-card li {
-    padding: 0.9rem 0;
-    padding-left: 2rem;
+    padding: 0.8rem 0;
+    padding-left: 1.5rem;
     position: relative;
-    color: #4a5568;
-    font-size: 1.05rem;
+    color: var(--text-light);
+    font-size: 0.95rem;
 }
 
 .resource-card li::before {
     content: '✓';
     position: absolute;
     left: 0;
-    color: #00a8cc;
+    color: var(--secondary-color);
     font-weight: bold;
-    font-size: 1.2rem;
 }
 
 /* ============================================
    Footer
    ============================================ */
 .footer {
-    background: linear-gradient(135deg, #0f172a 0%, #0066cc 100%);
+    background: linear-gradient(135deg, var(--dark-bg), var(--primary-color));
     color: white;
     text-align: center;
-    padding: 3rem 2rem;
+    padding: 2rem;
     margin-top: 3rem;
 }
 
 .footer p {
-    margin: 0.8rem 0;
+    margin: 0.5rem 0;
     opacity: 0.95;
-    font-size: 1.05rem;
 }
 
 /* ============================================
@@ -452,18 +430,16 @@ body {
    ============================================ */
 @media (max-width: 768px) {
     .nav-links {
-        gap: 0;
-    }
-
-    .nav-links {
         display: none;
         position: absolute;
         top: 60px;
         left: 0;
         right: 0;
-        background: linear-gradient(135deg, #0066cc, #00a8cc);
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         flex-direction: column;
-        padding: 0;
+        gap: 0;
+        padding: 1rem 0;
+        border-radius: 0 0 8px 8px;
     }
 
     .nav-links.active {
@@ -475,25 +451,23 @@ body {
     }
 
     .nav-links a {
-        padding: 1rem 1.5rem;
+        padding: 1rem;
+        text-align: center;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .dropdown-menu {
         position: static;
         display: none;
-        box-shadow: none;
-        background: rgba(0, 0, 0, 0.1);
-        margin-top: 0;
+        background: rgba(0, 102, 204, 0.9);
         border-radius: 0;
-    }
-
-    .dropdown:hover .dropdown-menu {
-        display: none;
+        box-shadow: none;
+        min-width: 100%;
     }
 
     .dropdown.active .dropdown-menu {
-        display: block;
+        display: flex;
+        flex-direction: column;
     }
 
     .menu-toggle {
@@ -501,7 +475,7 @@ body {
     }
 
     .hero-content h1 {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
     }
 
     .hero-content p {
@@ -509,7 +483,7 @@ body {
     }
 
     .section {
-        padding: 60px 20px;
+        padding: 50px 20px;
     }
 
     .section h2 {
@@ -521,29 +495,17 @@ body {
     .laws-grid,
     .resources-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .card,
-    .impact-card,
-    .law-card,
-    .resource-card {
-        padding: 2rem;
     }
 
     .card h3,
-    .impact-card h3,
     .law-card h3,
-    .resource-card h3 {
+    .resource-card h3,
+    .impact-card h3 {
         font-size: 1.4rem;
     }
 }
 
 @media (max-width: 480px) {
-    .hero {
-        padding: 100px 20px;
-    }
-
     .hero-content h1 {
         font-size: 2rem;
     }
@@ -569,13 +531,13 @@ body {
     }
 
     .card h3,
-    .impact-card h3,
     .law-card h3,
-    .resource-card h3 {
+    .resource-card h3,
+    .impact-card h3 {
         font-size: 1.2rem;
     }
 
-    .resource-card li {
-        font-size: 0.95rem;
+    .nav-links a {
+        padding: 0.75rem;
     }
 }

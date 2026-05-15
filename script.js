@@ -6,41 +6,34 @@ menuToggle.addEventListener('click', () => {
     navLinks.classList.toggle('active');
 });
 
+// Dropdown menu toggle for mobile
+const dropdowns = document.querySelectorAll('.dropdown');
+dropdowns.forEach(dropdown => {
+    const toggle = dropdown.querySelector('.dropdown-toggle');
+    if (toggle) {
+        toggle.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+                
+                // Close other dropdowns
+                dropdowns.forEach(d => {
+                    if (d !== dropdown) {
+                        d.classList.remove('active');
+                    }
+                });
+            }
+        });
+    }
+});
+
 // Close menu when a link is clicked
 const navItems = navLinks.querySelectorAll('a');
 navItems.forEach(item => {
-    item.addEventListener('click', (e) => {
-        // Don't close if it's a dropdown toggle
-        if (!item.classList.contains('dropdown-toggle')) {
+    if (!item.classList.contains('dropdown-toggle')) {
+        item.addEventListener('click', () => {
             navLinks.classList.remove('active');
-        }
-    });
-});
-
-// Dropdown menu toggle for mobile
-const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-dropdownToggles.forEach(toggle => {
-    toggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        const dropdown = toggle.parentElement;
-        
-        // Close other dropdowns
-        document.querySelectorAll('.dropdown').forEach(d => {
-            if (d !== dropdown) {
-                d.classList.remove('active');
-            }
-        });
-        
-        // Toggle current dropdown
-        dropdown.classList.toggle('active');
-    });
-});
-
-// Close dropdowns when clicking outside
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('.dropdown')) {
-        document.querySelectorAll('.dropdown').forEach(d => {
-            d.classList.remove('active');
+            dropdowns.forEach(d => d.classList.remove('active'));
         });
     }
 });
@@ -60,7 +53,7 @@ window.addEventListener('scroll', () => {
 
     navItems.forEach(item => {
         item.classList.remove('active');
-        if (item.getAttribute('href').slice(1) === current) {
+        if (item.getAttribute('href') && item.getAttribute('href').slice(1) === current) {
             item.classList.add('active');
         }
     });
@@ -93,9 +86,9 @@ document.querySelectorAll('.card, .impact-card, .law-card, .resource-card').forE
 const style = document.createElement('style');
 style.textContent = `
     .nav-links a.active {
-        opacity: 0.9;
+        opacity: 0.8;
         border-bottom: 3px solid white;
-        padding-bottom: 0.45rem;
+        padding-bottom: 5px;
     }
 `;
 document.head.appendChild(style);
